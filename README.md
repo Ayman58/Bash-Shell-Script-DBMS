@@ -1,6 +1,6 @@
                         بسم الله الرحمن الرحيم    
 
-__this is our project in bash shell scripting__
++B this is our project in bash shell scripting
 
 team members :
        1- Ayman IBrahim Ahmed 
