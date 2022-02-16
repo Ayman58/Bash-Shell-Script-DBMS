@@ -281,7 +281,7 @@ do
 			;;
 		"List DataBases") listDB
 			;;
-		"Connect To DataBase") connectDB
+		"Connect To DataBase") whichdb 
 			;;
 		"Drop DataBase") dropDB
                         ;;
