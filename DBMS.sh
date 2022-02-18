@@ -1,8 +1,7 @@
 #!/user/bin/bash
-#########################################################
 mkdir database 2> /dev/null 
 cd database
-#####################################################
+pwd
 function creattable {
 
 echo /----------------------------------------------/
@@ -25,7 +24,7 @@ for (( i=0 ; i<$coloum_n ; i+=1 ))
 do 
 	echo Enter coloum $((i+1)) name 
 	read cname
-        coloum[$i]="${cname} ," # >>$tbname.csv
+        coloum[$i]="${cname} ," 
 done 
 echo table name is $tbname.csv
 echo num of coloum = $coloum_n
@@ -33,7 +32,7 @@ echo coloum names are ${coloum[*]}
 echo ${coloum[*]} >>$tbname.csv
 
 fi
-connecttoDB
+connectDB
 }
 ##########################################################
 function listtables {
@@ -50,7 +49,7 @@ then
 else
 	echo there is no table called $tb
 fi
-connecttoDB
+connectDB
 }
 ########################################################
 function inserttotable {
@@ -107,7 +106,7 @@ then
 	fi
 else echo there is no table called $tb
 fi 
-connecttoDB	
+connectDB	
 }
 ##################################################
 function selectfromtable {
@@ -124,10 +123,13 @@ echo your selection is:
 echo *_______________________________________________________________*
 awk -F, '{{if(($1=='$row')){print $0 }}}' $tb.csv
 echo *_______________________________________________________________*
+
 else 
 	echo $tb not a table 2> /dev/null
 fi
-connecttoDB
+
+connectDB
+
 }
 ###################################################
 function deletefromtable {
@@ -146,7 +148,7 @@ then
 else
 	echo there is no table called $tb 
 fi
-connecttoDB
+connectDB
 }
 ####################################
 function droptables {
@@ -163,7 +165,21 @@ fi
 
 }
 ######################################################################
-function createDB(){
+function createDB {
+	echo /----------------------------------------------------/
+echo Enter database name 
+read dbname
+if [ -d "$dbname" ]
+       then
+       echo "$dbname already exists"
+
+       else  
+	mkdir $dbname
+echo $dbname database has been created successfully
+fi
+}
+#####################################################################
+function createDB_md(){
 tput bold 
 printf "Would You Write The Name Of Your Database:"
 tput sgr0
@@ -188,19 +204,19 @@ cd ..
 function listDB(){
 tput bold
 tput setaf 4
-echo "All Databases Thar Esixt: "
+echo "All Databases That Esixt: "
 tput sgr0
-
-ls #./database
+ls
 }
 ###################################################################
 function whichdb {
 	echo *_______________________________________________________________*
 echo which database you want to connect to?
-read 
-if [ -d $REPLY ]
-then cd $REPLY
-	connecttoDB
+read db
+
+if [ -d $db ]
+then #cd $db
+	connectDB
 else 2> /dev/null
 echo not a database, please insert a valid database! 
 #menu
