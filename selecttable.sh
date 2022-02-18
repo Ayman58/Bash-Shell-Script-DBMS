@@ -1,0 +1,21 @@
+#!/user/bin/bash
+function selectfromtable {
+	echo /------------------------------------------------/
+echo which table you want to select from ?"(only name without .csv)"
+read tb
+if [ -f "$tb.csv" ]
+       then
+
+echo which row do you want? please enter primary key of this table
+read row
+clear
+echo your selection is:
+echo /------------------------------------------------------------------/
+awk -F, '{{if(($1=='$row')){print $0 }}}' $tb.csv
+echo /------------------------------------------------------------------/
+else
+	echo $tb not a table 2> /dev/null
+fi
+connecttoDB
+}
+selectfromtable
