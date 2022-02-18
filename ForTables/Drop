@@ -1,0 +1,17 @@
+#!/user/bin/bash
+
+
+echo which table you want to drop?"(only name without .csv)"
+read tb
+if [ -f "$tb.csv" ]
+       then
+	rm $tb.csv
+	tput bold
+	tput setaf 2 
+	echo "Table With Name $tb, has been droped"
+	tput sgr0 
+else
+	echo $tb not a table 2> /dev/null
+fi
+
+

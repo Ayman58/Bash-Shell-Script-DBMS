@@ -1,0 +1,71 @@
+#!/usr/bin/bash
+#just enter the database then work with tables
+
+
+function printScreen2(){
+printf '\nChoose:
+ 1) Create Table
+ 2) List Tables
+ 3) Drop Table 
+ 4) Insert into Table 
+ 5) Select from Table
+ 6) Delete from Table
+ 7) Main Screen'
+}
+
+printf "Enter Batabase Name to connect: "
+read dbname
+if [ -d ./Database/$dbname ]
+#if ls|grep -w "$dbname";
+then
+	cd ./Database/$dbname
+	tput setaf 2	
+	echo "You have been connected to database $dbname, here its the tables in it: "
+	ls
+	tput setaf 0
+	tput bold	
+	echo "Now You Have The Authority to Work in These Tables"
+	tput sgr0
+#pwd
+	while(true)
+	do
+	printScreen2
+	read num2
+pwd
+	case $num2 in
+	1) source ../../ForTables/Create
+	;;
+	2) source ../../ForTables/List
+	;;
+	3) source ../../ForTables/Drop
+	;;
+	4) source ../../ForTables/Insert
+	;;
+	5) source ../../ForTables/Select
+	;;
+	6) source ../../ForTables/Delete
+	;;
+	7)pwd 
+	cd ../..
+	break
+	pwd;;
+	*)
+	tput setaf 1 
+	echo 'This Is Not In The List'
+	tput sgr0 
+	;;
+	esac
+
+	done
+else
+	tput setaf 1
+	echo "Database with name $dbname, doesnot exist"
+	tput sgr0
+fi
+
+
+
+
+
+
+

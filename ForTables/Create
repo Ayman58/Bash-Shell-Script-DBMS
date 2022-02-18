@@ -1,0 +1,33 @@
+#!/user/bin/bash
+
+echo Enter table name "(without .csv)"
+read tbname 
+pwd
+touch ahmed
+echo "$tbname.csv"
+if [ -f $tbname.csv ]
+then
+	tput setaf 1	
+	echo "Table Already Exist, You Can Create Another One!!" 
+	tput sgr0
+else 
+	touch $tbname.csv
+	tput setaf 2
+	tput bold
+	echo "Table with name $tbname, has been created!"
+	tput setaf 0	
+	echo "Enter the number of colums in the table" 
+	tput sgr0	
+	read coloum_n
+	for (( i=0 ; i<$coloum_n ; i+=1 ))
+		do 
+			echo Enter coloum $((i+1)) name 
+			read cname
+			coloum[$i]="${cname} ," # >>$tbname.csv
+		done 
+	echo table name is $tbname.csv
+	echo num of coloum = $coloum_n
+	echo coloum names are ${coloum[*]}
+	echo ${coloum[*]} >>$tbname.csv
+fi
+

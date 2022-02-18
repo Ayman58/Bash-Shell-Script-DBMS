@@ -1,0 +1,19 @@
+#!/usr/bin/bash
+
+#just remove the directory if exist
+printf "Would You Write The Database's Name: "
+read dbname
+if [ -d ./Database/$dbname ]
+then
+	rm -dr ./Database/$dbname
+	tput bold
+	tput setaf 2
+	echo "Database with name $dbname, has removed"
+	tput sgr0
+else
+	tput setaf 1
+	echo "Database with name $dbname, does not exist"
+	tput sgr0
+fi
+
+

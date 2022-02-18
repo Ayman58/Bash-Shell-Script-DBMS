@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+tput bold
+tput setaf 4
+echo "All Databases Thar Esixt: "
+tput sgr0
+
+ls ./Database
+

@@ -1,0 +1,50 @@
+#!/usr/bin/bash
+
+declare -i x=0
+
+function create(){
+tput bold
+printf "Would You Write The Name Of Your Database:\t"
+tput sgr0
+
+read dbname
+#check if DB (directory Exist or not)
+# I use -w in grep to search in the exact name
+#if ls ../Database|grep -w $dbname;
+if [ -d ../Database/$dbname ];
+then
+echo $dbname
+        echo "Database with name $dbname is already exist, you could try with another name!!!"
+	try
+#fi
+else # !(ls | grep -w "$dbname");
+#then
+#note: i used .. but it turn that it create a directory wrt old directory not the new one
+        mkdir -p ./Database/$dbname
+tput setaf 2        
+tput bold
+printf "Done, database with name $dbname created in a directory"
+tput sgr0
+fi
+#comeback to -try- directory
+#cd ..
+}
+
+function try()
+{
+printf "press:
+ 1) to try again
+ 2) exit"
+        read num
+        case $num in
+                1)create ;;
+                2)exit;;
+                *);;
+        esac
+
+}
+
+
+create
+
+
